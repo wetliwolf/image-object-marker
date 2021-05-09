@@ -89,3 +89,61 @@ void MarkerViewer::Close()
 		_window_name = std::string();
 	}
 }
+
+
+int MarkerViewer::GetWindowKey(){
+	return cv::waitKey(0);
+};
+
+
+//! マーカーの取得
+const std::vector<cv::Rect> MarkerViewer::GetMarkers() const{
+	std::vector<cv::Rect> objects = removeOutRangeRect(_objects, _image.size());
+	std::vector<cv::Rect> objects2;
+	util::RescaleRect(objects, objects2, 1.0 / _display_scale);
+	return objects2;
+};
+
+
+//! マーカーの設定
+void MarkerViewer::SetMarkers(const std::vector<cv::Rect>& objects){
+	util::RescaleRect(objects, _objects, _display_scale);
+	_change_flag = true;
+	RedrawImage();
+};
+
+
+//! マーカーを消す
+void MarkerViewer::DeleteMarker()
+{
+	if (!_objects.empty()){
+		_objects.pop_back();
+		_change_flag = true;
+		RedrawImage();
+	}
+}
+
+
+//! マーカーの位置をずらしたり、大きさの変更を行う
+void MarkerViewer::ReshapeMarker(const cv::Rect& mv)
+{
+	if (!_objects.empty()){
+		cv::Rect* rect = &(_objects.back());
+		rect->x += mv.x;
+		rect->y += mv.y;
+		rect->width += mv.width;
+		rect->height += mv.height;
+		if (rect->width <= 0)
+			rect->width = 1;
+		if (rect->height <= 0)
+			rect->height = 1;
+		_change_flag = true;
+		RedrawImage();
+	}
+}
+
+
+//! マーカーの大きさを変更する
+void MarkerViewer::ResizeMarker(float scale)
+{
+	if (scale <= 0)
