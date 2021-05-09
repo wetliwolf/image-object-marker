@@ -47,3 +47,45 @@ MarkerViewer::MarkerViewer()
 
 
 MarkerViewer::~MarkerViewer()
+{
+	Close();
+}
+
+
+void MarkerViewer::Init()
+{
+	_roi_b = cv::Point2d(-1, -1);
+	_roi_e = cv::Point2d(-1, -1);
+	_display_scale = 1.0;	// ディスプレイ表示の原画像からの縮尺
+	_FIX_MARKER_AR = false;	// マーカーの縦横比を固定するかどうか
+	_aspect_ratio = 1.0; // マーカーのアスペクト比（幅/高さ）
+	_ACCEPT_POINT = false;	// マーカーの点形状を認めるか否か
+	_GUIDE_SHAPE = GUIDE_NONE;	// ガイドの形状
+	_guide_rect = cv::Rect(0, 0, 0, 0);	// ガイドの矩形
+	_guide_rect_org = cv::Rect(0, 0, 0, 0);	// ガイドの矩形(縮尺前)
+	_SHOW_GUIDE = false;	// ガイドの表示有無
+
+	_change_flag = false;
+}
+
+
+void MarkerViewer::Open(const cv::Mat& image, const std::string& window_name)
+{
+	Close();
+
+	_window_name = window_name;
+	cv::resize(image, _image, cv::Size(_display_scale * image.cols, _display_scale * image.rows));
+	cv::namedWindow(_window_name);
+	cv::setMouseCallback(_window_name, MarkerViewer::on_mouse, this);
+	RedrawImage();
+//	_change_flag = false;
+}
+
+
+void MarkerViewer::Close()
+{
+	if (!_window_name.empty()){
+		cv::destroyWindow(_window_name);
+		_window_name = std::string();
+	}
+}
