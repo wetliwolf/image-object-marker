@@ -147,3 +147,62 @@ void MarkerViewer::ReshapeMarker(const cv::Rect& mv)
 void MarkerViewer::ResizeMarker(float scale)
 {
 	if (scale <= 0)
+		return;
+
+	if (!_objects.empty()){
+		cv::Rect* rect = &(_objects.back());
+		int w = util::round(scale * rect->width);
+		int h = util::round(scale * rect->height);
+		if (_FIX_MARKER_AR)
+			h = util::round((double)w / _aspect_ratio);
+		if (w < 1 || h < 1)
+			return;
+
+		//rect->x += (rect->width - w) / 2;
+		//rect->y += (rect->height - h) / 2;
+		rect->width = w;
+		rect->height = h;
+		_change_flag = true;
+		RedrawImage();
+	}
+}
+
+
+//! アスペクト比固定の設定/解除
+bool MarkerViewer::SwitchFixAR()
+{
+	_FIX_MARKER_AR = !_FIX_MARKER_AR;
+	if (_FIX_MARKER_AR && !_objects.empty()){
+		_aspect_ratio = (double)_objects.back().width / _objects.back().height;
+	}
+	return _FIX_MARKER_AR;
+}
+
+
+//! ガイド用矩形を設定
+void MarkerViewer::SetGuideRectangle(const cv::Rect& rect)
+{
+	_guide_rect_org = rect;
+	if (_guide_rect_org.width > 0 && _guide_rect_org.height > 0)
+		util::RescaleRect(_guide_rect_org, _guide_rect, _display_scale);
+
+}
+
+//! ガイド用矩形を設定
+void MarkerViewer::SetGuideShape(int shape){
+	if (shape < 0 || shape > 4)
+		return;
+	_GUIDE_SHAPE = shape;
+	RedrawImage();
+}
+
+
+
+//! 画像枠外の矩形を削除
+std::vector<cv::Rect> MarkerViewer::removeOutRangeRect(const std::vector<cv::Rect>& objects, const cv::Size& img_size)
+{
+	std::vector<cv::Rect> dst_objects;
+	std::vector<cv::Rect>::const_iterator rect_itr = objects.begin();
+	while (rect_itr != objects.end()){
+		if (util::CheckRectOverlapSize(*rect_itr, img_size))
+			dst_objects.push_back(*rect_itr);
