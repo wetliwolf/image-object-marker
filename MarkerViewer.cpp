@@ -252,3 +252,50 @@ void MarkerViewer::Read(const cv::FileNode& fn)
 
 	int disp = fng["display"].empty() ? 0 : fng["display"];
 	_SHOW_GUIDE = disp > 0;
+
+	RedrawImage();
+}
+
+
+//! ƒpƒ‰ƒ[ƒ^‘‚«‚İ
+void MarkerViewer::Write(cv::FileStorage& fs, const std::string& node_name) const
+{
+	if (!node_name.empty())
+		fs << node_name;
+	fs << "{";
+	fs << "display_scale" << _display_scale;
+	fs << "fix_marker_ratio" << (int)(_FIX_MARKER_AR ? 1 : 0);
+	fs << "aspect_ratio" << _aspect_ratio;
+	fs << "accept_point_shape" << (int)(_ACCEPT_POINT ? 1 : 0);
+
+	if (_GUIDE_SHAPE == GUIDE_NONE)
+		return;
+
+	fs << "guide" << "{";
+	cvWriteComment(fs.fs, "1:SQUARE, 2:RECTANGLE, 3:CIRCLE, 4:ELLIPSE", 0);
+	fs << "shape" << _GUIDE_SHAPE;
+	fs << "position" << _guide_rect;
+	fs << "display" << (int)(_SHOW_GUIDE ? 1 : 0);
+	fs << "}";
+
+	fs << "}";
+}
+
+
+void MarkerViewer::MouseButtonDown(int x, int y){
+	_roi_b = _roi_e = cv::Point2d(x, y);
+}
+
+void MarkerViewer::MouseMove(int x, int y)
+{
+	_roi_e.x = x;
+
+	if (!_FIX_MARKER_AR) {
+		_roi_e.y = y;
+	}
+	else {
+		_roi_e.y = _roi_b.y + ((_roi_e.x - _roi_b.x) / _aspect_ratio);
+	}
+
+	RedrawImage();
+}
