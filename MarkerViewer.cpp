@@ -206,3 +206,49 @@ std::vector<cv::Rect> MarkerViewer::removeOutRangeRect(const std::vector<cv::Rec
 	while (rect_itr != objects.end()){
 		if (util::CheckRectOverlapSize(*rect_itr, img_size))
 			dst_objects.push_back(*rect_itr);
+		rect_itr++;
+	}
+	return dst_objects;
+}
+
+
+//! ステータスの表示
+void MarkerViewer::PrintStatus() const{
+	std::cout << "マーカーの縦横比は" << (_FIX_MARKER_AR ? "固定" : "自由") << std::endl;
+	if (_FIX_MARKER_AR) {
+		std::cout << "アスペクト比 (width / height): " << _aspect_ratio << std::endl;
+	}
+	std::cout << "点マーカーを許可： " << (_ACCEPT_POINT ? "YES" : "NO") << std::endl;
+	std::cout << "表示縮尺： " << _display_scale << std::endl;
+}
+
+
+//! パラメータ読み込み
+void MarkerViewer::Read(const cv::FileNode& fn)
+{
+	fn["display_scale"] >> _display_scale;
+	if (_display_scale <= 0)
+		_display_scale = 1.0;
+
+	int fixed = fn["fix_marker_ratio"];
+	_FIX_MARKER_AR = (fixed == 1) ? true : false;
+	fn["aspect_ratio"] >> _aspect_ratio;
+	int point = fn["accept_point_shape"];
+	_ACCEPT_POINT = (point == 1) ? true : false;
+
+	cv::FileNode fng = fn["guide"];
+	_GUIDE_SHAPE = GUIDE_NONE;
+	_SHOW_GUIDE = false;
+
+	if (fng.empty())
+		return;
+
+	if (!fng["shape"].empty())
+		fng["shape"] >> _GUIDE_SHAPE;
+
+	cv::Rect rectangle;
+	fng["position"] >> rectangle;
+	SetGuideRectangle(rectangle);
+
+	int disp = fng["display"].empty() ? 0 : fng["display"];
+	_SHOW_GUIDE = disp > 0;
