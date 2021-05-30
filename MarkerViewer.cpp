@@ -299,3 +299,56 @@ void MarkerViewer::MouseMove(int x, int y)
 
 	RedrawImage();
 }
+
+
+void MarkerViewer::MouseButtonUp()
+{
+	int topleft_x = std::min(_roi_b.x, _roi_e.x);
+	int topleft_y = std::min(_roi_b.y, _roi_e.y);
+	double width = std::abs(_roi_b.x - _roi_e.x);
+	double height = std::abs(_roi_b.y - _roi_e.y);
+
+	if ((width == 0 || height == 0) && !_ACCEPT_POINT) return;
+
+	cv::Rect rectangle = cv::Rect(topleft_x, topleft_y, width, height);
+	_objects.push_back(rectangle);
+	_roi_b.x = -1;  // indicates that there's no temporary rectangle
+	RedrawImage();
+	_change_flag = true;
+}
+
+
+void MarkerViewer::MouseRButtonUp(int x, int y)
+{
+	int idx = SelectObject(x, y);
+	if (idx < 0)
+		return;
+
+	std::vector<cv::Rect>::iterator it = _objects.begin();
+	it += idx;
+	cv::Rect selected_rect = *it;
+	_objects.erase(it);
+	_objects.push_back(selected_rect);
+}
+
+
+//! ‹éŒ`‚Ì‚P‚Â‚ð‘I‘ð
+int MarkerViewer::SelectObject(int x, int y)
+{
+	int threshold = 3;
+	int min_dist = threshold + 1;
+	int min_idx = -1;
+	int num_obj = _objects.size();
+	for (int i = 0; i < num_obj; i++){
+		cv::Rect rect = _objects[i];
+		int dist = std::min(std::abs(rect.x - x), std::abs(rect.x + rect.width - x));
+		if (dist < threshold && dist < min_dist){
+			if (y < rect.y + rect.height && y >= rect.y){
+				min_dist = dist;
+				min_idx = i;
+			}
+		}
+		dist = std::min(std::abs(rect.y - y), std::abs(rect.y + rect.height - y));
+		if (dist < threshold && dist < min_dist){
+			if (x < rect.x + rect.width && x >= rect.x){
+				min_dist = dist;
