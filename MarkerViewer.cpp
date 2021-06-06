@@ -352,3 +352,61 @@ int MarkerViewer::SelectObject(int x, int y)
 		if (dist < threshold && dist < min_dist){
 			if (x < rect.x + rect.width && x >= rect.x){
 				min_dist = dist;
+				min_idx = i;
+			}
+		}
+	}
+	return min_idx;
+}
+
+
+void MarkerViewer::on_mouse(int event, int x, int y, int flag, void* param)
+{
+	MarkerViewer* viewer = (MarkerViewer*)param;
+
+	// If left mouse button is pressed, record the first coordinate
+	if (event == CV_EVENT_LBUTTONDOWN) {
+		//printf("Left mouse button pressed\n");
+		viewer->MouseButtonDown(x, y);
+	}
+
+	// If mouse is moved while left mouse button is still pressed
+#ifdef WIN32
+	if (event == CV_EVENT_MOUSEMOVE && flag == CV_EVENT_FLAG_LBUTTON) {
+#else
+	if (event == CV_EVENT_MOUSEMOVE && flag == 33) {
+#endif
+		viewer->MouseMove(x, y);
+	}
+
+	// If left mouse button is released
+	if (event == CV_EVENT_LBUTTONUP) {
+		viewer->MouseButtonUp();
+	}
+
+	// If right mouse button is pressed, select one in rectangles
+	if (event == CV_EVENT_RBUTTONUP){
+		viewer->MouseRButtonUp(x, y);
+	}
+}
+
+
+void MarkerViewer::RedrawImage()
+{
+	if (!is_open())
+		return;
+
+	cv::Mat image2 = _image.clone();
+
+	if (_SHOW_GUIDE &&
+		_guide_rect.width >0 && _guide_rect.height >0){
+		if (_GUIDE_SHAPE == GUIDE_SQUARE)
+			cv::rectangle(image2, cvPoint(_guide_rect.x, _guide_rect.y),
+			cv::Point(_guide_rect.x + _guide_rect.width, _guide_rect.y + _guide_rect.width),
+			CV_RGB(255, 255, 0), 1);
+		else if (_GUIDE_SHAPE == GUIDE_RECTANGLE)
+			cv::rectangle(image2, cvPoint(_guide_rect.x, _guide_rect.y),
+			cv::Point(_guide_rect.x + _guide_rect.width, _guide_rect.y + _guide_rect.height),
+			CV_RGB(255, 255, 0), 1);
+		else if (_GUIDE_SHAPE == GUIDE_CIRCLE)
+			cv::ellipse(image2, cvPoint((_guide_rect.x + _guide_rect.width) / 2, (_guide_rect.y + _guide_rect.height) / 2),
