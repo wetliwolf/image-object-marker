@@ -34,3 +34,64 @@
 
 #ifndef __MARKER_VIEWER__
 #define __MARKER_VIEWER__
+
+#include <opencv2/core/core.hpp>
+
+class MarkerViewer
+{
+public:
+	//////////// ガイドの形状 //////////////
+	const static int GUIDE_NONE = 0;
+	const static int GUIDE_SQUARE = 1;
+	const static int GUIDE_RECTANGLE = 2;
+	const static int GUIDE_CIRCLE = 3;
+	const static int GUIDE_ELLIPSE = 4;
+	////////////////////////////////////////
+
+public:
+	//!< 画像とウィンドウ名のセット
+	MarkerViewer();
+	~MarkerViewer();
+
+	//! 画像とウィンドウ名で起動
+	void Open(const cv::Mat& image, const std::string& window_name);
+
+	//! 窓を閉じる
+	void Close();
+
+	//! 開いているかどうか
+	bool is_open(){
+		return !_window_name.empty(); 
+	}
+
+	bool is_changed(){
+		return _change_flag;
+	}
+
+	void reset_change(){
+		_change_flag = false;
+	}
+
+	//! パラメータ読み込み
+	void Read(const cv::FileNode& fn);
+
+	//! パラメータ書き込み
+	void Write(cv::FileStorage& fs, const std::string& node_name) const;
+
+	//! ウィンドウに入力されたキーを取得
+	int GetWindowKey();
+
+	//! マーカーの取得
+	const std::vector<cv::Rect> GetMarkers() const;
+
+	//! マーカーの設定
+	void SetMarkers(const std::vector<cv::Rect>& objects);
+
+	//! マーカーを消す
+	void DeleteMarker();
+	
+	//! マーカーの位置をずらしたり、大きさの変更を行う
+	void ReshapeMarker(const cv::Rect& mv);
+
+	//! マーカーの大きさを変更する
+	void ResizeMarker(float scale);
