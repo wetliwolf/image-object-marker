@@ -410,3 +410,29 @@ void MarkerViewer::RedrawImage()
 			CV_RGB(255, 255, 0), 1);
 		else if (_GUIDE_SHAPE == GUIDE_CIRCLE)
 			cv::ellipse(image2, cvPoint((_guide_rect.x + _guide_rect.width) / 2, (_guide_rect.y + _guide_rect.height) / 2),
+			cv::Size(_guide_rect.width / 2, _guide_rect.width / 2), 0, 0, 360, CV_RGB(255, 255, 0), 1);
+		else if (_GUIDE_SHAPE == GUIDE_ELLIPSE)
+			cv::ellipse(image2, cvPoint((_guide_rect.x + _guide_rect.width) / 2, (_guide_rect.y + _guide_rect.height) / 2),
+			cv::Size(_guide_rect.width / 2, _guide_rect.height / 2), 0, 0, 360, CV_RGB(255, 255, 0), 1);
+	}
+
+	// Display all rectangles
+	int numOfRect = (int)(_objects.size());
+	for (int i = 0; i < numOfRect; i++) {
+		cv::Rect_<double> rectangle = _objects.at(i);
+		if (rectangle.width > 0 || rectangle.height > 0) {
+			cv::rectangle(image2, cvPoint(rectangle.x, rectangle.y),
+				cvPoint(rectangle.x + (int)(rectangle.width), rectangle.y + (int)(rectangle.height)),
+				CV_RGB(255, 0, 0), 1);
+		}
+		else {
+			cv::circle(image2, cvPoint(rectangle.x, rectangle.y), 1, CV_RGB(255, 0, 0));
+		}
+	}
+
+	if (_roi_b.x > 0) {
+		cv::rectangle(image2, cvPoint((int)_roi_b.x, (int)_roi_b.y), cvPoint((int)_roi_e.x, (int)_roi_e.y), CV_RGB(255, 0, 0), 1);
+	}
+
+	cv::imshow(_window_name, image2);
+}
