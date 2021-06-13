@@ -95,3 +95,60 @@ public:
 
 	//! マーカーの大きさを変更する
 	void ResizeMarker(float scale);
+
+	//! 表示スケールをセットする
+	void SetDisplayScale(double scale){
+		_display_scale = scale;
+	};
+
+	//! アスペクト比固定の設定/解除
+	bool SwitchFixAR();
+
+	//! アスペクト比の設定
+	void SetAspectRatio(double ratio){
+		if (ratio > 0)
+			_aspect_ratio = ratio;
+	}
+
+	// 点形状の許可/不許可
+	bool SwitchAcceptPointShape(){
+		_ACCEPT_POINT = !_ACCEPT_POINT;
+		return _ACCEPT_POINT;
+	}
+
+	// ガイドの表示/非表示切り替え
+	bool SwitchShowGuide(){
+		_SHOW_GUIDE = !_SHOW_GUIDE;
+		RedrawImage();
+		return _SHOW_GUIDE;
+	}
+
+	// ガイドの表示
+	void ShowGuide(){
+		_SHOW_GUIDE = true;
+		RedrawImage();
+	}
+
+	//! ガイド用矩形を設定
+	void SetGuideRectangle(const cv::Rect& rect);
+
+	//! ガイド用矩形を設定
+	void SetGuideShape(int shape);
+
+	//! マウスのボタンが押された時のアクション
+	void MouseButtonDown(int x, int y);
+
+	//! マウスのボタンが押されたまま動かした時のアクション
+	void MouseMove(int x, int y);
+
+	//! マウスのボタンを上げた時のアクション
+	void MouseButtonUp();
+
+	//! マウスの右ボタンを上げた時のアクション
+	void MouseRButtonUp(int x, int y);
+
+	//! ステータスの表示
+	void PrintStatus() const;
+
+private:
+	bool _change_flag;	//! 描画等の変更があったかどうか
