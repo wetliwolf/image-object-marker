@@ -152,3 +152,45 @@ public:
 
 private:
 	bool _change_flag;	//! 描画等の変更があったかどうか
+
+	std::string _window_name;	//!< 描画窓
+
+	cv::Point2d _roi_b, _roi_e;	//!< マウスドラッグの始点と終点
+
+	cv::Mat _image;	//!< 表示画像
+
+	std::vector<cv::Rect> _objects;	//!< 表示画像に対し付与された全マーカー
+
+	/////// パラメータ /////////////
+	bool _FIX_MARKER_AR;	//!< マーカーの縦横比を固定するかどうか
+	double _aspect_ratio; //!< マーカーのアスペクト比（幅/高さ）
+	bool _ACCEPT_POINT;	//!< マーカーの点形状を認めるか否か
+	double _display_scale;	// ディスプレイ表示の原画像からの縮尺
+
+	bool _SHOW_GUIDE;	//!< ガイドの表示
+	int _GUIDE_SHAPE;	//!< ガイドの形状
+	cv::Rect _guide_rect;	//!< ガイドの位置とサイズ
+	cv::Rect _guide_rect_org;	//!< ガイドの位置とサイズ(縮尺前)
+	///////////////////////////////////
+
+private:
+	//! パラメータ初期化
+	void Init();
+
+	//! マウス操作要コールバック関数
+	static void on_mouse(int event, int x, int y, int flag, void* param);	
+
+	//! 画像枠外の矩形を削除
+	static std::vector<cv::Rect> removeOutRangeRect(const std::vector<cv::Rect>& objects, const cv::Size& img_size);
+
+	//! ウィンドウの再描画
+	void RedrawImage();
+
+	//! 矩形の１つを選択
+	/*!
+	\return x,yに最も近いオブジェクトのID
+	*/
+	int SelectObject(int x, int y);
+};
+
+#endif
