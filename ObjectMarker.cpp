@@ -55,3 +55,56 @@ bool ObjectMarker::saveConfiguration(const std::string& config_name,
 	const MarkerViewer& marker_viewer)
 {
 	cv::FileStorage fs(config_name, cv::FileStorage::WRITE);
+
+	if (!fs.isOpened())
+		return false;
+
+	fs << "image_folder" << input_dir;
+	fs << "output_file" << outputname;
+	marker_viewer.Write(fs, "Viewer");
+
+	return true;
+}
+
+
+bool ObjectMarker::loadConfiguration(const std::string& config_name,
+	std::string& input_dir, std::string& outputname,
+	MarkerViewer& marker_viewer)
+{
+	cv::FileStorage fs(config_name, cv::FileStorage::READ);
+	if (!fs.isOpened())
+		return false;
+
+	fs["image_folder"] >> input_dir;
+	fs["output_file"] >> outputname;
+	marker_viewer.Read(fs["Viewer"]);
+	return true;
+}
+
+
+void ObjectMarker::printHelp() {
+	printf("\nObject Marker: \n\t 画像中のオブジェクト位置を記録するためのツール\n");
+	printf("\tGunawan Herman, April 2006\n");
+	printf("\tAdapted from ObjectMarker.cpp by A.Florian\n");
+	printf("\tModified and localized by Takuya MINAGAWA in 2014\n");
+	printf("\n");
+	printf("------------------------------------------------------------\n");
+	printf("|  btn  |               function                           |\n");
+	printf("|-------|--------------------------------------------------|\n");
+	printf("|Enter  | 現在のマーカーをファイルに記述し、               |\n");
+	printf("|       | 次の画像を読み込む                               |\n");
+	printf("|Space  | Enterと同じ                                      |\n");
+	printf("|BS     | ひとつ前の画像に戻る                             |\n");
+	printf("|ESC    | プログラムを終了                                 |\n");
+	printf("|d      | 一番新しいマーカーを消去                         |\n");
+	printf("|r      | 前フレームのマーカーを１つ呼び出す               |\n");
+	printf("|8      | 一番新しいマーカーを1 px上へ動かす               |\n");
+	printf("|9      | 一番新しいマーカーを10px上へ動かす               |\n");
+	printf("|2      | 一番新しいマーカーを1 px下へ動かす               |\n");
+	printf("|3      | 一番新しいマーカーを10px下へ動かす               |\n");
+	printf("|4      | 一番新しいマーカーを1 px左へ動かす               |\n");
+	printf("|5      | 一番新しいマーカーを10px左へ動かす               |\n");
+	printf("|6      | 一番新しいマーカーを1 px右へ動かす               |\n");
+	printf("|7      | 一番新しいマーカーを10px右へ動かす               |\n");
+	printf("|w      | 一番新しいマーカーの幅を1 px拡大する             |\n");
+	printf("|W      | 一番新しいマーカーの幅を1 px縮小する             |\n");
