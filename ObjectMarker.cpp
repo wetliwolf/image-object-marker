@@ -211,3 +211,59 @@ bool ObjectMarker::LoadAnnotationFile(const std::string& anno_file)
 	_annotation_file = anno_file;
 
 	// ヘッダの書き込み
+	return !util::AddHeaderLine(anno_file);
+}
+
+
+
+bool ObjectMarker::jump(int idx)
+{
+	if (_marker_viewer.is_changed()){
+		_rectlist[_image_idx] = _marker_viewer.GetMarkers();
+		util::AddAnnotationLine(_annotation_file, _file_list[_image_idx], _rectlist[_image_idx]);
+		_marker_viewer.reset_change();
+	}
+
+	if (idx < 0 || idx >= _file_list.size())
+		return false;
+
+	std::string load_img_file = _file_list[idx];
+	cv::Mat img = cv::imread(load_img_file);
+	if (img.empty()){
+		std::cerr << "Fail to read file " << load_img_file << "." << std::endl;
+		return false;
+	}
+
+	// マーカーをセット
+	_marker_viewer.SetMarkers(_rectlist[idx]);
+	_marker_viewer.reset_change();
+	
+	std::ostringstream oss;
+	oss << idx + 1 << " - " << load_img_file;
+	_marker_viewer.Open(img, oss.str());
+
+	_image_idx = idx;
+
+	return true;
+}
+
+
+//! アノテーションファイルを整形して出力
+inline bool ObjectMarker::ExportAnnotationFile(const std::string& filename){
+	return util::SaveAnnotationFile(filename, _file_list, _rectlist);
+};
+
+
+void ObjectMarker::CopyFormerMarkers()
+{
+	if (_image_idx > 0){
+		if (!_rectlist[_image_idx].empty() || !_rectlist[_image_idx - 1].empty()){
+			_marker_viewer.SetMarkers(_rectlist[_image_idx - 1]);
+		}
+	}
+}
+
+//! アノテーションで画像を切り取って保存
+inline void ObjectMarker::CropAndSaveImages(const std::string& dir_name){
+	util::CropAnnotatedImageRegions(dir_name, _file_list, _rectlist);
+}
