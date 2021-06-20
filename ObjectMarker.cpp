@@ -169,3 +169,45 @@ std::vector<std::vector<cv::Rect>> ObjectMarker::reorderAnnotation(
 
 		if (j < num_ref)
 			annotation[j] = loaded_annotation[i];
+	}
+
+	return annotation;
+}
+
+
+bool ObjectMarker::Load(const std::string& image_dir, const std::string& anno_file)
+{
+	// フォルダから画像一覧を取得
+	std::string input_dir = image_dir;
+	_file_list.clear();
+	while (!util::ReadImageFilesInDirectory(input_dir, _file_list)){
+		std::cout << "no appropriate input files in directory " << input_dir << std::endl;
+		std::string flag = util::AskQuestionGetString("Quit?(1:Yes, 0:No): ");
+		if (flag == "1")
+			return false;
+		input_dir = util::AskQuestionGetString("New Image Directory Name: ");
+	}
+
+	_image_idx = 0;
+
+	_input_dir = input_dir;
+
+	return LoadAnnotationFile(anno_file);
+}
+
+
+bool ObjectMarker::LoadAnnotationFile(const std::string& anno_file)
+{
+	// アノテーションファイルを読み込み
+	std::vector<std::string> anno_file_list;
+	std::vector<std::vector<cv::Rect>> anno_rect_list;
+	util::LoadAnnotationFile(anno_file, anno_file_list, anno_rect_list);
+
+	// フォルダの画像一覧とアノテーションファイルを紐づけ
+	_rectlist = reorderAnnotation(anno_file_list, anno_rect_list, _file_list);
+	anno_file_list.clear();
+	anno_rect_list.clear();
+
+	_annotation_file = anno_file;
+
+	// ヘッダの書き込み
