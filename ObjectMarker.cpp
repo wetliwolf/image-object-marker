@@ -267,3 +267,62 @@ void ObjectMarker::CopyFormerMarkers()
 inline void ObjectMarker::CropAndSaveImages(const std::string& dir_name){
 	util::CropAnnotatedImageRegions(dir_name, _file_list, _rectlist);
 }
+
+
+int ObjectMarker::run(const std::string& conf_file)
+{
+	///////// パラメータ ///////////
+	std::string annotation_file;	// 出力テキストファイル名
+	std::string input_dir = "rawdata";	// 入力フォルダ
+	///////////////////////////////////
+
+	bool ret = loadConfiguration(conf_file, input_dir, annotation_file, _marker_viewer);
+
+	if (annotation_file.empty())
+		annotation_file = "annotation.txt";
+
+	Load(input_dir, annotation_file);
+
+	printHelp();
+	printStatus();
+
+	enum KeyBindings {
+		Key_Enter = 13, Key_ESC = 27, Key_Space = 32, Key_BS = 8
+	};
+
+	bool loop = this->begin();
+	while(loop){
+		// Get user input
+		int iKey = _marker_viewer.GetWindowKey();
+
+		// Press ESC to close this program, any unsaved changes will be discarded
+		if (iKey == Key_ESC){
+			loop = false;
+		}
+		// Press Space or Enter to save marked objects on current image and proceed to the next image
+		else if (iKey == Key_Space || iKey == Key_Enter){
+			loop = this->next();
+		}
+		else if (iKey == Key_BS){
+			if(!this->prev())
+				std::cout << "Can't back to the former image." << std::endl;
+		}
+		// Press d to remove the last added object
+		else if (iKey == 'd'){
+			_marker_viewer.DeleteMarker();
+		}
+		else if (iKey == '8'){
+			_marker_viewer.ReshapeMarker(cv::Rect(0,-1,0,0));
+		}
+		else if(iKey == '9'){
+			_marker_viewer.ReshapeMarker(cv::Rect(0, -10, 0, 0));
+		}
+		else if (iKey == '2'){
+			_marker_viewer.ReshapeMarker(cv::Rect(0, 1, 0, 0));
+		}
+		else if(iKey == '3'){
+			_marker_viewer.ReshapeMarker(cv::Rect(0, 10, 0, 0));
+		}
+		else if (iKey == '4'){
+			_marker_viewer.ReshapeMarker(cv::Rect(-1, 0, 0, 0));
+		}
