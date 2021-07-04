@@ -326,3 +326,59 @@ int ObjectMarker::run(const std::string& conf_file)
 		else if (iKey == '4'){
 			_marker_viewer.ReshapeMarker(cv::Rect(-1, 0, 0, 0));
 		}
+		else if (iKey == '5'){
+			_marker_viewer.ReshapeMarker(cv::Rect(-10, 0, 0, 0));
+		}
+		else if (iKey == '6'){
+			_marker_viewer.ReshapeMarker(cv::Rect(1, 0, 0, 0));
+		}
+		else if (iKey == '7'){
+			_marker_viewer.ReshapeMarker(cv::Rect(10, 0, 0, 0));
+		}
+		else if (iKey == 'w'){
+			_marker_viewer.ReshapeMarker(cv::Rect(0, 0, 1, 0));
+		}
+		else if (iKey == 'W'){
+			_marker_viewer.ReshapeMarker(cv::Rect(0, 0, -1, 0));
+		}
+		else if (iKey == 'h'){
+			_marker_viewer.ReshapeMarker(cv::Rect(0, 0, 0, 1));
+		}
+		else if (iKey == 'H'){
+			_marker_viewer.ReshapeMarker(cv::Rect(0, 0, 0, -1));
+		}
+		else if (iKey == 'z'){
+			_marker_viewer.ResizeMarker(1.02);
+		}
+		else if (iKey == 'Z'){
+			_marker_viewer.ResizeMarker(0.98);
+		}
+		else if (iKey == 'c'){
+			std::cout << "Cropping images with annotated rectangles." << std::endl;
+			std::string dir_name = util::AskQuestionGetString("Folder name to save images: ");
+			CropAndSaveImages(dir_name);
+		}
+		else if (iKey == 'm'){
+			_marker_viewer.SwitchFixAR();
+			printStatus();
+		}
+		else if (iKey == 'a'){
+			double ratio = util::AskQuestionGetDouble("Aspect ratio of object (Width / Height): ");
+			if (ratio <= 0){
+				std::cerr << "Illegal aspect ratio: " << ratio;
+			}
+			else{
+				_marker_viewer.SetAspectRatio(ratio);
+			}
+		}
+		else if (iKey == 's'){
+			double scale = util::AskQuestionGetDouble("Display Image Scale: ");
+			_marker_viewer.SetDisplayScale(scale);
+			this->reload();
+		}
+		else if (iKey == 'e'){
+			std::vector<cv::Rect> objects = _marker_viewer.GetMarkers();
+			for (int i = 0; i < objects.size(); i++) {
+				cv::Rect rect = objects[i];
+				std::cout << rect.x << " " << rect.y << " " << rect.width << " " << rect.height << std::endl;
+			}
