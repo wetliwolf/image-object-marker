@@ -382,3 +382,66 @@ int ObjectMarker::run(const std::string& conf_file)
 				cv::Rect rect = objects[i];
 				std::cout << rect.x << " " << rect.y << " " << rect.width << " " << rect.height << std::endl;
 			}
+		}
+		else if (iKey == 'p'){
+			std::cout << "“_Œ`ó‚Ì‹–‰ÂF " << (_marker_viewer.SwitchAcceptPointShape() ? "YES" : "NO") << std::endl;
+		}
+		else if (iKey == 't'){
+			printHelp();
+			printStatus();
+		}
+		else if (iKey == 'j'){
+			int target_id = util::AskQuestionGetInt("Jump to image#: ");
+			if (!jump(target_id - 1)){
+				std::cerr << "Fail to jump #" << target_id << std::endl;
+			}
+		}
+		else if (iKey == 'r'){
+			this->CopyFormerMarkers();
+		}
+		else if (iKey == 'g'){
+			std::cout << "GUIDE: " << (_marker_viewer.SwitchShowGuide() ? "ON" : "OFF") << std::endl;
+		}
+		else if (iKey == 'G'){
+			int shape_id = util::AskQuestionGetInt("Choose shape (0:NONE, 1:SQUARE, 2:RECTANGLE, 3:CIRCLE, 4:ELLIPSE): ");
+			if (shape_id >= 0 && shape_id < 5){
+				_marker_viewer.SetGuideShape(shape_id);
+				if (shape_id > 0){
+					cv::Rect grect;
+					grect.x = util::AskQuestionGetInt("input x: ");
+					grect.y = util::AskQuestionGetInt("input y: ");
+					grect.width = util::AskQuestionGetInt("input width: ");
+					grect.height = util::AskQuestionGetInt("input height: ");
+					_marker_viewer.SetGuideRectangle(grect);
+				}
+				_marker_viewer.ShowGuide();
+			}
+			else{
+				std::cout << "Wrong Input" << std::endl;
+			}
+		}
+		// change work folder (= reboot)
+		else if (iKey == 'f'){
+			input_dir = util::AskQuestionGetString("New Image Directory Name: ");
+			Load(input_dir, _annotation_file);
+			this->begin();
+		}
+		else if (iKey == 'o'){
+			std::string outputname = util::AskQuestionGetString("New Output File Name: ");
+			LoadAnnotationFile(outputname);
+			this->reload();
+		}
+		else if (iKey == 'O'){
+			std::string save_file = util::AskQuestionGetString("Export Annotation File Name: ");
+			if (!ExportAnnotationFile(save_file))
+				std::cerr << "Fail to export annotation to file " << save_file << "." << std::endl;
+		}
+		else{
+			std::cout << "Unrecognised command" << std::endl;
+		}
+	};
+
+	saveConfiguration(conf_file, _input_dir, _annotation_file, _marker_viewer);
+
+	return 0;
+}
