@@ -9,4 +9,4 @@
 //
 //                           License Agreement
 //
-// Copyright (C
+// Copyright (C) 2014 Takuya MINAGAWA, 2006 Gunawan Herman, 2003 F
