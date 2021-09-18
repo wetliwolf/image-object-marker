@@ -31,4 +31,7 @@
 //
 //M*/
 #ifndef __OBJECT_MARKER__
-#define _
+#define __OBJECT_MARKER__
+
+#include <opencv2/core/core.hpp>
+#include 
