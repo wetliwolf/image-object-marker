@@ -34,4 +34,10 @@
 #define __OBJECT_MARKER__
 
 #include <opencv2/core/core.hpp>
-#include 
+#include "MarkerViewer.h"
+
+
+class ObjectMarker
+{
+public:
+	Obje
