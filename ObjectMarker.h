@@ -40,4 +40,7 @@
 class ObjectMarker
 {
 public:
-	Obje
+	ObjectMarker();
+	~ObjectMarker();
+
+	//! �v���O�����N
