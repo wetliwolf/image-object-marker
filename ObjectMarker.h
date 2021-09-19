@@ -43,4 +43,7 @@ public:
 	ObjectMarker();
 	~ObjectMarker();
 
-	//! �v���O�����N
+	//! �v���O�����N��
+	int run(const std::string& conf_file);
+
+	bool be
