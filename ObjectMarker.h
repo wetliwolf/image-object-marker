@@ -46,4 +46,5 @@ public:
 	//! �v���O�����N��
 	int run(const std::string& conf_file);
 
-	bool be
+	bool begin(){ return jump(0); };
+	bool next(){ return 
