@@ -47,4 +47,6 @@ public:
 	int run(const std::string& conf_file);
 
 	bool begin(){ return jump(0); };
-	bool next(){ return 
+	bool next(){ return jump(_image_idx + 1); };
+	bool prev(){ return jump(_image_idx - 1); };
+	bool re
