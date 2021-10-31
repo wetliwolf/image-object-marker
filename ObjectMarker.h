@@ -49,4 +49,7 @@ public:
 	bool begin(){ return jump(0); };
 	bool next(){ return jump(_image_idx + 1); };
 	bool prev(){ return jump(_image_idx - 1); };
-	bool re
+	bool reload(){ return jump(_image_idx); };
+	bool jump(int idx);
+
+	
