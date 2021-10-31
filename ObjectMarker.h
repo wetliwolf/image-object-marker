@@ -52,4 +52,7 @@ public:
 	bool reload(){ return jump(_image_idx); };
 	bool jump(int idx);
 
+	//! �w���v���\��
+	static void printHelp();
+
 	
