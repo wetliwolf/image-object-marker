@@ -55,4 +55,7 @@ public:
 	//! �w���v���\��
 	static void printHelp();
 
-	
+	//! �X�e�[�^�X�\��
+	void printStatus() const;
+
+	//! �ݒ��t�@�C���
