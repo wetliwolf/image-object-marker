@@ -61,4 +61,5 @@ public:
 	//! �ݒ��t�@�C���̕ۑ�
 	/*!
 	\param[in] config_name �ݒ��t�@�C����
-	\
+	\param[in] input_dir �摜�i�[�t�H���_��
+	\param[in] out
