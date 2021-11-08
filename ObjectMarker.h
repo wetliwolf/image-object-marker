@@ -58,4 +58,7 @@ public:
 	//! �X�e�[�^�X�\��
 	void printStatus() const;
 
-	//! �ݒ��t�@�C���
+	//! �ݒ��t�@�C���̕ۑ�
+	/*!
+	\param[in] config_name �ݒ��t�@�C����
+	\
