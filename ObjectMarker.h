@@ -63,4 +63,7 @@ public:
 	\param[in] config_name �ݒ��t�@�C����
 	\param[in] input_dir �摜�i�[�t�H���_��
 	\param[in] outputname �o�̓e�L�X�g�t�@�C����
-	\param[in] display_scale
+	\param[in] display_scale �摜�̕\���X�P�[��
+	\return �t�@�C���������݂̐���
+	*/
+	stati
