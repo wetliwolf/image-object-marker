@@ -68,4 +68,10 @@ public:
 	*/
 	static bool saveConfiguration(const std::string& config_name,
 		const std::string& input_dir, const std::string& outputname,
-		const MarkerViewer& marker_v
+		const MarkerViewer& marker_viewer
+		);
+
+
+	//! �ݒ��t�@�C���̓ǂݍ���
+	/*!
+	\param[in] c
