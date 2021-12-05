@@ -66,4 +66,4 @@ public:
 	\param[in] display_scale �摜�̕\���X�P�[��
 	\return �t�@�C���������݂̐���
 	*/
-	stati
+	static bool saveConfiguration(const std::string& config_name,
