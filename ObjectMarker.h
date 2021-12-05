@@ -67,4 +67,5 @@ public:
 	\return �t�@�C���������݂̐���
 	*/
 	static bool saveConfiguration(const std::string& config_name,
-		const std::string& input_dir, const std::s
+		const std::string& input_dir, const std::string& outputname,
+		const MarkerViewer& marker_v
