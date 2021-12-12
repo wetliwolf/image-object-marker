@@ -75,4 +75,6 @@ public:
 	//! �ݒ��t�@�C���̓ǂݍ���
 	/*!
 	\param[in] config_name �ݒ��t�@�C����
-	\param[out] input_dir �摜�i�[�t�
+	\param[out] input_dir �摜�i�[�t�H���_��
+	\param[out] outputname �o�̓e�L�X�g�t�@�C����
+	\para
