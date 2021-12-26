@@ -80,4 +80,6 @@ public:
 	\param[out] display_scale �摜�̕\���X�P�[��
 	\return �t�@�C���ǂݍ��݂̐���
 	*/
-	static bool loadConfiguration(const std::string& c
+	static bool loadConfiguration(const std::string& config_name,
+		std::string& input_dir, std::string& outputname,
+		Ma
