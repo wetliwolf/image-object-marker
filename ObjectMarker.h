@@ -82,4 +82,7 @@ public:
 	*/
 	static bool loadConfiguration(const std::string& config_name,
 		std::string& input_dir, std::string& outputname,
-		Ma
+		MarkerViewer& marker_viewer
+		);
+
+	bool Load(const std::string&
