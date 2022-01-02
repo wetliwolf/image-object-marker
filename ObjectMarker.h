@@ -85,4 +85,5 @@ public:
 		MarkerViewer& marker_viewer
 		);
 
-	bool Load(const std::string&
+	bool Load(const std::string& image_dir, const std::string& anno_file);
+	bool LoadAnnotationF
