@@ -86,4 +86,6 @@ public:
 		);
 
 	bool Load(const std::string& image_dir, const std::string& anno_file);
-	bool LoadAnnotationF
+	bool LoadAnnotationFile(const std::string& anno_file);
+
+	//! �O�̃t���
