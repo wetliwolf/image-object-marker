@@ -92,4 +92,6 @@ public:
 	void CopyFormerMarkers();
 
 	//! �A�m�e�[�V�����ŉ摜���؂������ĕۑ�
-	void CropAnd
+	void CropAndSaveImages(const std::string& dir_name);
+
+	//! �A�m�e�[�V�����t�@�C���
