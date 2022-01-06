@@ -90,3 +90,6 @@ public:
 
 	//! �O�̃t���[���̃}�[�J�[�����t���[���ɃR�s�[
 	void CopyFormerMarkers();
+
+	//! �A�m�e�[�V�����ŉ摜���؂������ĕۑ�
+	void CropAnd
