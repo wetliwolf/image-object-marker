@@ -98,4 +98,5 @@ public:
 	bool ExportAnnotationFile(const std::string& filename);
 
 private:
-	std::string _input_dir;	// ���̓t�H���
+	std::string _input_dir;	// ���̓t�H���_
+	std::string _annotation_file;	// �o�̓t�@�C�
