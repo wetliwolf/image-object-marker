@@ -95,4 +95,7 @@ public:
 	void CropAndSaveImages(const std::string& dir_name);
 
 	//! �A�m�e�[�V�����t�@�C���𐮌`���ďo��
-	bool ExportAnnotationFile(const std::str
+	bool ExportAnnotationFile(const std::string& filename);
+
+private:
+	std::string _input_dir;	// ���̓t�H���
