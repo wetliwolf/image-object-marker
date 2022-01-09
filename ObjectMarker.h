@@ -94,4 +94,5 @@ public:
 	//! �A�m�e�[�V�����ŉ摜���؂������ĕۑ�
 	void CropAndSaveImages(const std::string& dir_name);
 
-	//! �A�m�e�[�V�����t�@�C���
+	//! �A�m�e�[�V�����t�@�C���𐮌`���ďo��
+	bool ExportAnnotationFile(const std::str
