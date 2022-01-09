@@ -99,4 +99,6 @@ public:
 
 private:
 	std::string _input_dir;	// ���̓t�H���_
-	std::string _annotation_file;	// �o�̓t�@�C�
+	std::string _annotation_file;	// �o�̓t�@�C��
+
+	std::vector<std::string> _file_list;	// �摜�t
