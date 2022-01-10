@@ -101,4 +101,5 @@ private:
 	std::string _input_dir;	// ���̓t�H���_
 	std::string _annotation_file;	// �o�̓t�@�C��
 
-	std::vector<std::string> _file_list;	// �摜�t
+	std::vector<std::string> _file_list;	// �摜�t�@�C���ւ̃p�X
+	std::vector<std::vector<cv::Rect>>	_rectlist;	// �e�摜�̃A
