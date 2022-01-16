@@ -103,4 +103,9 @@ private:
 
 	std::vector<std::string> _file_list;	// �摜�t�@�C���ւ̃p�X
 	std::vector<std::vector<cv::Rect>>	_rectlist;	// �e�摜�̃A�m�e�[�V����
-	MarkerViewer _marker_viewer;	//
+	MarkerViewer _marker_viewer;	// Viewer�N���X
+
+	int _image_idx;		// ���ݎQ�Ƃ��Ă����摜ID
+
+
+	/
