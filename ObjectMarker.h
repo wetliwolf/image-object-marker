@@ -112,4 +112,5 @@ private:
 	/*!
 	���[�h���ꂽ�A�m�e�[�V�����ɑΉ������摜�t�@�C�������A�Q�Ɖ摜�t�@�C�����ƑΉ������悤�ɕ��ёւ�
 	\param[in] loaded_img_list ���͉摜���X�g
-	\p
+	\param[in] loaded_annotation �ǂݍ��܂ꂽ�A�m�e�[�V����
+	\param[
