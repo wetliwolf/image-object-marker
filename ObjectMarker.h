@@ -114,4 +114,6 @@ private:
 	\param[in] loaded_img_list ���͉摜���X�g
 	\param[in] loaded_annotation �ǂݍ��܂ꂽ�A�m�e�[�V����
 	\param[in] ref_img_list �Q�ƃA�m�e�[�V����
-	\return ����
+	\return �������ꂽ�A�m�e�[�V����
+	*/
+	static std::vector<std::vector<cv:
