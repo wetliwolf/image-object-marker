@@ -116,4 +116,5 @@ private:
 	\param[in] ref_img_list �Q�ƃA�m�e�[�V����
 	\return �������ꂽ�A�m�e�[�V����
 	*/
-	static std::vector<std::vector<cv::Rect>> reorderAnnotation(const std::vector<std::s
+	static std::vector<std::vector<cv::Rect>> reorderAnnotation(const std::vector<std::string>& loaded_img_list,
+		const std::vector<std::vect
