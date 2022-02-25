@@ -117,4 +117,5 @@ private:
 	\return �������ꂽ�A�m�e�[�V����
 	*/
 	static std::vector<std::vector<cv::Rect>> reorderAnnotation(const std::vector<std::string>& loaded_img_list,
-		const std::vector<std::vect
+		const std::vector<std::vector<cv::Rect>>& loaded_annotation,
+		const std::vector<std
