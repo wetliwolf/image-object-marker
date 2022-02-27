@@ -118,4 +118,9 @@ private:
 	*/
 	static std::vector<std::vector<cv::Rect>> reorderAnnotation(const std::vector<std::string>& loaded_img_list,
 		const std::vector<std::vector<cv::Rect>>& loaded_annotation,
-		const std::vector<std
+		const std::vector<std::string>& ref_img_list);
+
+
+};
+
+#endif
