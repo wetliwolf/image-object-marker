@@ -7,4 +7,6 @@
 //  copy or use the software.
 //
 //
-//                      
+//                           License Agreement
+//
+// Copyright (C) 2014 Taku
