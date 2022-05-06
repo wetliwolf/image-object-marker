@@ -40,4 +40,5 @@ namespace util{
 	template <typename T>
 	T TransString(const std::string& str){
 		T val;
-		if (typeid(T) == type
+		if (typeid(T) == typeid(int) || typeid(T) == typeid(long) ||
+			type
