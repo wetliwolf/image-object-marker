@@ -38,4 +38,6 @@
 namespace util{
 
 	template <typename T>
-	T Tran
+	T TransString(const std::string& str){
+		T val;
+		if (typeid(T) == type
