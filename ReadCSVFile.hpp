@@ -35,4 +35,7 @@
 #include <vector>
 #include <fstream>
 
-namespace uti
+namespace util{
+
+	template <typename T>
+	T Tran
