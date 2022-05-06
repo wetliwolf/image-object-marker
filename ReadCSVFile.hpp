@@ -41,4 +41,4 @@ namespace util{
 	T TransString(const std::string& str){
 		T val;
 		if (typeid(T) == typeid(int) || typeid(T) == typeid(long) ||
-			type
+			typeid(T) == typeid(unsigned int) || typeid(T) == typ
