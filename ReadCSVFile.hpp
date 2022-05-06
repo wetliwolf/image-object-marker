@@ -47,4 +47,6 @@ namespace util{
 		else if (typeid(T) == typeid(float) || typeid(T) == typeid(double)){
 			val = atof(str.c_str());
 		}
-		e
+		else if (typeid(T) == typeid(std::string)){
+			val = str;
+	
