@@ -44,4 +44,4 @@ namespace util{
 			typeid(T) == typeid(unsigned int) || typeid(T) == typeid(unsigned long)){
 			val = atoi(str.c_str());
 		}
-		
+		else if (typeid(T) == typeid(float) || typeid
