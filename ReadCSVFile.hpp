@@ -49,4 +49,10 @@ namespace util{
 		}
 		else if (typeid(T) == typeid(std::string)){
 			val = str;
-	
+		}
+		return val;
+	};
+
+
+	// input_string��separater�ŕ���
+	tem
