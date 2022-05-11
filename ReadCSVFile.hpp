@@ -55,4 +55,5 @@ namespace util{
 
 
 	// input_string��separater�ŕ���
-	tem
+	template <typename T>
+	std::vector<T> TokenizeString(const std::s
