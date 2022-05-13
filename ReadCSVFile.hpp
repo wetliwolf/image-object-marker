@@ -65,4 +65,6 @@ namespace util{
 			index = 0;
 			while (true){
 				index = input_string.find(*separater_itr, index);
-				i
+				if (index == std::string::npos){
+					break;
+	
