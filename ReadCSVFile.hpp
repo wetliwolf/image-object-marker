@@ -58,4 +58,5 @@ namespace util{
 	template <typename T>
 	std::vector<T> TokenizeString(const std::string& input_string, const std::vector<std::string>& separater_vec)
 	{
-		std::vector<std::string>::const_ite
+		std::vector<std::string>::const_iterator separater_itr;
+		std::vector<std::string::size_type>
