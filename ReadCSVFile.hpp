@@ -67,4 +67,9 @@ namespace util{
 				index = input_string.find(*separater_itr, index);
 				if (index == std::string::npos){
 					break;
+				}
+				else{
+					index_vec.push_back(index);
+					index++;
+				}
 	
