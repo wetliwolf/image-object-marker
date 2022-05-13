@@ -64,4 +64,5 @@ namespace util{
 		for (separater_itr = separater_vec.begin(); separater_itr != separater_vec.end(); separater_itr++){
 			index = 0;
 			while (true){
-	
+				index = input_string.find(*separater_itr, index);
+				i
