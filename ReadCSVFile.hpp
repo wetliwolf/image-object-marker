@@ -61,4 +61,4 @@ namespace util{
 		std::vector<std::string>::const_iterator separater_itr;
 		std::vector<std::string::size_type>	index_vec;
 		std::string::size_type	index;
-		for (separate
+		for (separater_itr = separater_vec.begin(); separater_itr != separate
