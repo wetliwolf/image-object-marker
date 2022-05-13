@@ -59,4 +59,6 @@ namespace util{
 	std::vector<T> TokenizeString(const std::string& input_string, const std::vector<std::string>& separater_vec)
 	{
 		std::vector<std::string>::const_iterator separater_itr;
-		std::vector<std::string::size_type>
+		std::vector<std::string::size_type>	index_vec;
+		std::string::size_type	index;
+		for (separate
