@@ -82,4 +82,7 @@ namespace util{
 		int str_size;
 		for (idx_itr = index_vec.begin(); idx_itr != index_vec.end(); idx_itr++){
 			str_size = *idx_itr - start_idx;
-			ret_substr_vec.push_back(TransString<T>(input_string.substr(start_idx, str_siz
+			ret_substr_vec.push_back(TransString<T>(input_string.substr(start_idx, str_size)));
+			start_idx = *idx_itr + 1;
+		}
+		ret_substr_vec.push_
