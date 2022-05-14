@@ -72,4 +72,6 @@ namespace util{
 					index_vec.push_back(index);
 					index++;
 				}
-	
+			}
+		}
+		sort(index_vec.begin(), index_vec.end())
