@@ -74,4 +74,7 @@ namespace util{
 				}
 			}
 		}
-		sort(index_vec.begin(), index_vec.end())
+		sort(index_vec.begin(), index_vec.end());
+
+		std::vector<T> ret_substr_vec;
+		std::vec
