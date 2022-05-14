@@ -78,4 +78,6 @@ namespace util{
 
 		std::vector<T> ret_substr_vec;
 		std::vector<std::string::size_type>::iterator idx_itr;
-		std::strin
+		std::string::size_type start_idx = 0;
+		int str_size;
+		for (idx_itr = 
