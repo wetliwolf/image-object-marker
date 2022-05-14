@@ -81,4 +81,5 @@ namespace util{
 		std::string::size_type start_idx = 0;
 		int str_size;
 		for (idx_itr = index_vec.begin(); idx_itr != index_vec.end(); idx_itr++){
-			str_si
+			str_size = *idx_itr - start_idx;
+			ret_substr_vec.push_back
