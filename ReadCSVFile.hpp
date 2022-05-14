@@ -80,4 +80,5 @@ namespace util{
 		std::vector<std::string::size_type>::iterator idx_itr;
 		std::string::size_type start_idx = 0;
 		int str_size;
-		for (idx_itr = 
+		for (idx_itr = index_vec.begin(); idx_itr != index_vec.end(); idx_itr++){
+			str_si
