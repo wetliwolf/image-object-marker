@@ -77,4 +77,5 @@ namespace util{
 		sort(index_vec.begin(), index_vec.end());
 
 		std::vector<T> ret_substr_vec;
-		std::vec
+		std::vector<std::string::size_type>::iterator idx_itr;
+		std::strin
