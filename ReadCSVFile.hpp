@@ -85,4 +85,6 @@ namespace util{
 			ret_substr_vec.push_back(TransString<T>(input_string.substr(start_idx, str_size)));
 			start_idx = *idx_itr + 1;
 		}
-		ret_substr_vec.push_
+		ret_substr_vec.push_back(TransString<T>(input_string.substr(start_idx)));
+
+		retur
