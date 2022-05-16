@@ -91,4 +91,6 @@ namespace util{
 	}
 
 
-	// CSV�t�@�C�������X�g
+	// CSV�t�@�C�������X�g�����O���X�g���擾
+	template <typename T>
+	
