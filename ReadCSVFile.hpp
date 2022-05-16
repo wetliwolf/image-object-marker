@@ -96,4 +96,6 @@ namespace util{
 	bool ReadCSVFile(const std::string& input_file, std::vector<std::vector<T>>& output_strings,
 		const std::vector<std::string>& separater_vec = std::vector<std::string>())
 	{
-		std::vector<std::string> s
+		std::vector<std::string> sep_vec;
+		if (separater_vec.empty()){
+			sep_vec.push_bac
