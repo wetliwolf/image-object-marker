@@ -87,4 +87,8 @@ namespace util{
 		}
 		ret_substr_vec.push_back(TransString<T>(input_string.substr(start_idx)));
 
-		retur
+		return ret_substr_vec;
+	}
+
+
+	// CSV�t�@�C�������X�g
