@@ -102,4 +102,6 @@ namespace util{
 		}
 		else{
 			sep_vec = separater_vec;
-	
+		}
+		std::ifstream ifs(input_file);
+		if (!ifs.is_open())
