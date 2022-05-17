@@ -98,4 +98,8 @@ namespace util{
 	{
 		std::vector<std::string> sep_vec;
 		if (separater_vec.empty()){
-			sep_vec.push_bac
+			sep_vec.push_back(",");
+		}
+		else{
+			sep_vec = separater_vec;
+	
