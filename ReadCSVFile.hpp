@@ -110,3 +110,5 @@ namespace util{
 		output_strings.clear();
 
 		std::string buf;
+		while (ifs && std::getline(ifs, buf)){
+			std::vec
