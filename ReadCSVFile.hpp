@@ -105,3 +105,8 @@ namespace util{
 		}
 		std::ifstream ifs(input_file);
 		if (!ifs.is_open())
+			return false;
+
+		output_strings.clear();
+
+		std::string buf;
