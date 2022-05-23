@@ -121,4 +121,6 @@ namespace util{
 	//! CSV�t�@�C����std::vector�Ƃ��ēǂݍ���
 	template<typename T> void ReadList(const std::string& filename, std::vector<T>& dst_vector)
 	{
-		std::ifstream ifs(fi
+		std::ifstream ifs(filename);
+		std::string buf;
+		while (ifs && std::getlin
