@@ -111,4 +111,5 @@ namespace util{
 
 		std::string buf;
 		while (ifs && std::getline(ifs, buf)){
-			std::vec
+			std::vector<T> str_list = TokenizeString<T>(buf, sep_vec);
+			outpu
