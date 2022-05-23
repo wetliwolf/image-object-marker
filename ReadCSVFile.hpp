@@ -119,4 +119,4 @@ namespace util{
 
 
 	//! CSV�t�@�C����std::vector�Ƃ��ēǂݍ���
-	templa
+	template<typename T> void ReadList(const std::string& filena
