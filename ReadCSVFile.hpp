@@ -123,4 +123,6 @@ namespace util{
 	{
 		std::ifstream ifs(filename);
 		std::string buf;
-		while (ifs && std::getlin
+		while (ifs && std::getline(ifs, buf)){
+			dst_vector.push_back(TransString<T>(buf));
+	
