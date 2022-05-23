@@ -114,4 +114,9 @@ namespace util{
 			std::vector<T> str_list = TokenizeString<T>(buf, sep_vec);
 			output_strings.push_back(str_list);
 		}
-		return true
+		return true;
+	}
+
+
+	//! CSV�t�@�C����std::vector�Ƃ��ēǂݍ���
+	templa
