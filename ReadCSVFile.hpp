@@ -125,4 +125,7 @@ namespace util{
 		std::string buf;
 		while (ifs && std::getline(ifs, buf)){
 			dst_vector.push_back(TransString<T>(buf));
-	
+		}
+	}
+
+}
