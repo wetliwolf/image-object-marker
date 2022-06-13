@@ -8,4 +8,5 @@
 //
 //
 //                           License Agreement
-/
+//
+// Copyright (C) 2014 Takuya MINAGAWA, 2
