@@ -30,3 +30,8 @@
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 //M*/
+
+#include "ObjectMarker.h"
+
+
+int main(int argc, char* argv[]
