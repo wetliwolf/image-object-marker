@@ -36,4 +36,7 @@
 
 int main(int argc, char* argv[])
 {
-	std::string config_file = (argc > 1) ? argv[1] : 
+	std::string config_file = (argc > 1) ? argv[1] : "config.xml";
+	ObjectMarker object_marker;
+
+	obje
