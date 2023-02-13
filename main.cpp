@@ -34,4 +34,6 @@
 #include "ObjectMarker.h"
 
 
-int main(int argc, char* argv[]
+int main(int argc, char* argv[])
+{
+	std::string config_file = (argc > 1) ? argv[1] : 
