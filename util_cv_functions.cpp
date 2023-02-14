@@ -18,3 +18,66 @@
 // in the Software without restriction, including without limitation the rights to
 // use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
 // of the Software, and to permit persons to whom the Software is furnished to do
+// so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+// PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+// HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+// SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+//
+//M*/
+
+#include "util_cv_functions.h"
+#include "util_functions.h"
+#include "ReadCSVFile.hpp"
+#include <time.h>
+#include <opencv2/highgui/highgui.hpp>
+
+namespace util{
+
+	bool LoadAnnotationFile(const std::string& gt_file, std::vector<std::string>& imgpathlist, std::vector<std::vector<cv::Rect>>& rectlist)
+	{
+		std::vector<std::vector<std::string>> tokenized_strings;
+		std::vector<std::string> sep;
+		sep.push_back(" ");
+		if (!ReadCSVFile(gt_file, tokenized_strings, sep))
+			return false;
+
+		std::vector<std::vector<std::string>>::iterator it, it_end = tokenized_strings.end();
+		for (it = tokenized_strings.begin(); it != it_end; it++){
+			int num_str = it->size();
+			if (num_str < 2)
+				continue;
+
+			std::string filename = (*it)[0];
+			if (filename.empty() || filename.find("#") != std::string::npos){
+				continue;
+			}
+
+			imgpathlist.push_back(filename);
+			int obj_num = atoi((*it)[1].c_str());
+			std::vector<cv::Rect> rects;
+			for (int i = 0; i < obj_num && 4 * i + 6 <= num_str; i++){
+				int j = 4 * i + 2;
+				cv::Rect obj_rect;
+				obj_rect.x = atoi((*it)[j].c_str());
+				obj_rect.y = atoi((*it)[j + 1].c_str());
+				obj_rect.width = atoi((*it)[j + 2].c_str());
+				obj_rect.height = atoi((*it)[j + 3].c_str());
+				rects.push_back(obj_rect);
+			}
+			rectlist.push_back(rects);
+		}
+
+		return true;
+	}
+
+
+
+	bool SaveAnnotationFile(const std::string& anno_file, const std::vector<std::string>& img_files, const std::vector<std::vector<cv::Rect>>& obj_rects, const std::string& sep)
+	{
