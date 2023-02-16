@@ -135,3 +135,51 @@ namespace util{
 			cv::Rect rect = obj_rects[i];
 			ofs << sep << rect.x << sep << rect.y << sep << rect.width << sep << rect.height;
 		}
+		ofs << std::endl;
+		return true;
+	}
+
+
+	//! アノテーションをつけられた画像の領域を切り取って別ファイルとして保存
+	void CropAnnotatedImageRegions(const std::string& dir_path, const std::vector<std::string>& imgpathlist, const std::vector<std::vector<cv::Rect>>& rectlist)
+	{
+		assert(imgpathlist.size() == rectlist.size());
+
+		int count = 0;
+		int num_img = imgpathlist.size();
+		for (int i = 0; i<num_img; i++){
+			cv::Mat img = cv::imread(imgpathlist[i]);
+			if (img.empty())
+				continue;
+
+			int rect_num = rectlist[i].size();
+			for (int j = 0; j<rect_num; j++){
+				count++;
+				std::stringstream strstr;
+				strstr << dir_path << "/" << count << ".png";
+				cv::imwrite(strstr.str(), img(rectlist[i][j]));
+			}
+		}
+	}
+
+	void RescaleRect(const cv::Rect& rect, cv::Rect& dst_rect, double scale)
+	{
+		dst_rect.x = round(scale * rect.x);
+		dst_rect.y = round(scale * rect.y);
+		dst_rect.width = round(scale * rect.width);
+		dst_rect.height = round(scale * rect.height);
+	}
+
+
+	void RescaleRect(const std::vector<cv::Rect>& rects, std::vector<cv::Rect>& dst_rects, double scale)
+	{
+		int num_rect = rects.size();
+		dst_rects.resize(num_rect);
+		for (int i = 0; i < num_rect; i++){
+			cv::Rect dst;
+			RescaleRect(rects[i], dst, scale);
+			dst_rects[i] = dst;
+		}
+	}
+
+}
