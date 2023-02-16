@@ -81,3 +81,57 @@ namespace util{
 
 	bool SaveAnnotationFile(const std::string& anno_file, const std::vector<std::string>& img_files, const std::vector<std::vector<cv::Rect>>& obj_rects, const std::string& sep)
 	{
+		assert(img_files.size() == obj_rects.size());
+
+		std::ofstream ofs(anno_file);
+		if (!ofs.is_open())
+			return false;
+
+			int num = img_files.size();
+		for (int i = 0; i < num; i++){
+			ofs << img_files[i] << sep << obj_rects[i].size();
+			for (int j = 0; j < obj_rects[i].size(); j++){
+				cv::Rect rect = obj_rects[i][j];
+				ofs << sep << rect.x << sep << rect.y << sep << rect.width << sep << rect.height;
+			}
+			ofs << std::endl;
+		}
+
+		return true;
+	}
+
+
+	bool AddHeaderLine(const std::string& anno_file)
+	{
+		// 出力ファイルを開く
+		std::ofstream ofs(anno_file, std::ios::app);
+		if (!ofs.is_open()){
+			return false;
+		}
+		time_t rawtime;
+		struct tm * timeinfo;
+		time(&rawtime);
+		timeinfo = localtime(&rawtime);
+
+		ofs << std::endl;
+		ofs << "########################" << std::endl;
+		ofs << "#  " << asctime(timeinfo);
+		ofs << "########################" << std::endl;
+
+		return true;
+	}
+
+
+	bool AddAnnotationLine(const std::string& anno_file, const std::string& img_file, const std::vector<cv::Rect>& obj_rects, const std::string& sep)
+	{
+		// 出力ファイルを開く
+		std::ofstream ofs(anno_file, std::ios::app);
+		if (!ofs.is_open()){
+			return false;
+		}
+
+		ofs << img_file << sep << obj_rects.size();
+		for (int i = 0; i < obj_rects.size(); i++){
+			cv::Rect rect = obj_rects[i];
+			ofs << sep << rect.x << sep << rect.y << sep << rect.width << sep << rect.height;
+		}
