@@ -2,4 +2,4 @@
 //
 //  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.
 //
-//  By downloading, copying
+//  By downloading, copying, installing or using the software you agre
