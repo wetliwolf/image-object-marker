@@ -1,3 +1,5 @@
 /*M///////////////////////////////////////////////////////////////////////////////////////
 //
-//  IMPORTANT: READ BEFORE DOWNLOADING,
+//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.
+//
+//  By downloading, copying
