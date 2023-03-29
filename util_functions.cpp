@@ -10,4 +10,4 @@
 //                           License Agreement
 //
 // Copyright (C) 2014 Takuya MINAGAWA, 2006 Gunawan Herman, 2003 Florian Adolf.
-//
+// Third party copyrights are property of their respe
