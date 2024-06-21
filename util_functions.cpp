@@ -36,4 +36,6 @@
 #include <boost/filesystem/operations.hpp>
 #include <iostream>
 
-namespace uti
+namespace util{
+
+	std::string AskQuestionGetString(const std::
