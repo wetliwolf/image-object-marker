@@ -40,4 +40,10 @@ namespace util{
 
 	std::string AskQuestionGetString(const std::string& question){
 		std::cout << question;
-		std::st
+		std::string ans;
+		std::cin >> ans;
+		return ans;
+	}
+
+
+	int A
