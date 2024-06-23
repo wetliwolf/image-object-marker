@@ -47,4 +47,8 @@ namespace util{
 
 
 	int AskQuestionGetInt(const std::string& question){
-		std::string ans = A
+		std::string ans = AskQuestionGetString(question);
+		return atoi(ans.c_str());
+	}
+
+
