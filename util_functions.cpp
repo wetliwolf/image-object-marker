@@ -46,4 +46,5 @@ namespace util{
 	}
 
 
-	int A
+	int AskQuestionGetInt(const std::string& question){
+		std::string ans = A
