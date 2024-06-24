@@ -53,4 +53,5 @@ namespace util{
 
 
 	double AskQuestionGetDouble(const std::string& question){
-		std
+		std::string ans = AskQuestionGetString(question);
+		r
