@@ -54,4 +54,8 @@ namespace util{
 
 	double AskQuestionGetDouble(const std::string& question){
 		std::string ans = AskQuestionGetString(question);
-		r
+		return atof(ans.c_str());
+	}
+
+
+	// �f�B���N�g�������摜�t�@�C�����ꗗ��
