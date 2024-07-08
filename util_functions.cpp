@@ -58,4 +58,5 @@ namespace util{
 	}
 
 
-	// �f�B���N�g�������摜�t�@�C�����ꗗ��
+	// �f�B���N�g�������摜�t�@�C�����ꗗ���擾
+	bool ReadImageFilesInDirectory(const std::string
