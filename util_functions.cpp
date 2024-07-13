@@ -63,4 +63,6 @@ namespace util{
 	{
 		using namespace boost::filesystem;
 
-		path img_di
+		path img_dir_path(img_dir);
+		if (!is_directory(img_dir_path)){
+			return
