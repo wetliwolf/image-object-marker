@@ -61,3 +61,6 @@ namespace util{
 	// �f�B���N�g�������摜�t�@�C�����ꗗ���擾
 	bool ReadImageFilesInDirectory(const std::string& img_dir, std::vector<std::string>& image_lists)
 	{
+		using namespace boost::filesystem;
+
+		path img_di
