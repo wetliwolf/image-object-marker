@@ -69,4 +69,5 @@ namespace util{
 		}
 
 		directory_iterator end;
-		for (d
+		for (directory_iterator p(img_dir_path); p != end; ++p){
+			pat
