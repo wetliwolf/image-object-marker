@@ -65,4 +65,8 @@ namespace util{
 
 		path img_dir_path(img_dir);
 		if (!is_directory(img_dir_path)){
-			return
+			return false;
+		}
+
+		directory_iterator end;
+		for (d
