@@ -70,4 +70,5 @@ namespace util{
 
 		directory_iterator end;
 		for (directory_iterator p(img_dir_path); p != end; ++p){
-			pat
+			path file_p = p->path();
+			std::string ext = file_p.extension()
