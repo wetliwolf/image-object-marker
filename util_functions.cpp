@@ -72,4 +72,5 @@ namespace util{
 		for (directory_iterator p(img_dir_path); p != end; ++p){
 			path file_p = p->path();
 			std::string ext = file_p.extension().string();
-			if (ext == ".jpg" || ext == ".jpeg" || ext == ".JPG" || ext == ".JPEG" || ext == ".bmp" || ex
+			if (ext == ".jpg" || ext == ".jpeg" || ext == ".JPG" || ext == ".JPEG" || ext == ".bmp" || ext == ".BMP" || ext == ".png" || ext == ".PNG"){
+				image_
