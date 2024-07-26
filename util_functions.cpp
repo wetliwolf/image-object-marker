@@ -73,4 +73,10 @@ namespace util{
 			path file_p = p->path();
 			std::string ext = file_p.extension().string();
 			if (ext == ".jpg" || ext == ".jpeg" || ext == ".JPG" || ext == ".JPEG" || ext == ".bmp" || ext == ".BMP" || ext == ".png" || ext == ".PNG"){
-				image_
+				image_lists.push_back(file_p.string());
+			}
+		}
+		return true;
+	}
+}
+
